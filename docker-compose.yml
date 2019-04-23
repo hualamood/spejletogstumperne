@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  ipfs:
+    image: jbenet/go-ipfs:latest
+    command: [ "daemon", "--writable", "--enable-pubsub-experiment", "-migrate=true" ]
+
+  synced:
+    build: './syncedbase'
+    ports:
+      - '1147:1147'
+    links:
+      - 'ipfs:ipfs'
+
+  # ipfs_2:
+  #   image: jbenet/go-ipfs:latest
+  #   command: [ "daemon", "--writable", "--enable-pubsub-experiment", "-migrate=true" ]
+
+  synced_2:
+    build: './syncedbase'
+    ports:
+      - '1148:1147'
+    links:
+      - 'ipfs:ipfs'
